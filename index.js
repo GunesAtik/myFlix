@@ -34,6 +34,10 @@ app.get('/documentation', (req, res) => {
 
 app.use(express.static('public'));
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 // listen for requests
 app.listen(8080, () =>
