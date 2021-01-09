@@ -17,17 +17,19 @@ let topBooks = [
 ];
 
 // GET requests
+app.get('/movies', (req, res) => {
+  res.json(top10movies);
+});
+
 app.get('/', (req, res) => {
-  res.send('Welcome to my book club!');
+  res.send('Welcome to myFlix!');
 });
 
 app.get('/documentation', (req, res) => {
-  res.sendFile('public/documentation.html', { root: __dirname });
+  res.sendFile('public/documentation.html', { root: movie_api });
 });
 
-app.get('/books', (req, res) => {
-  res.json(topBooks);
-});
+
 
 
 // listen for requests
