@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
+app.use(morgan('common'));
+
 
 let topBooks = [
   {
@@ -34,5 +37,5 @@ app.get('/documentation', (req, res) => {
 
 // listen for requests
 app.listen(8080, () =>
-  console.log('Your app is listening on port 8080.');
+  console.log('Your app is listening on port 8080.')
 );
