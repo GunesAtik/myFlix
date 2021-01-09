@@ -32,7 +32,7 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', { root: movie_api });
 });
 
-
+app.use(express.static('public'));
 
 
 // listen for requests
