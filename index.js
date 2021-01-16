@@ -4,18 +4,21 @@ const morgan = require('morgan');
 app.use(morgan('common'));
 
 
-let topBooks = [
+let topMovies = [
   {
-    title: 'Harry Potter and the Sorcerer\'s Stone',
-    author: 'J.K. Rowling'
+    title: 'Reconstruction,
+    year: '2003',
+    director: 'Christoffer Boe'
   },
   {
-    title: 'Lord of the Rings',
-    author: 'J.R.R. Tolkien'
+    title: 'The Great Beauty',
+    year: '2013',
+    director: 'Paolo Sorrentino'
   },
   {
-    title: 'Twilight',
-    author: 'Stephanie Meyer'
+    title: 'Blue Jasmine',
+    year: '2013',
+    director: 'Woody Allen'
   }
 ];
 
