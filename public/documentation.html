@@ -17,5 +17,130 @@
      favorite movies.
    </p>
   </header>
+  <section>
+    <table>
+      <thead>
+        <tr>
+          <th>Business Logic</th>
+          <th>URL</th>
+          <th>HTTP Method</th>
+          <th>Request body data format</th>
+          <th>Response body data format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Get a list of all movies</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>A JSON object holding data about all the movies.</td>
+        </tr>
+        <tr>
+          <td>Get data about a single movie by title</td>
+          <td>/movies/:title</td>
+          <td>GET></td>
+          <td>None</td>
+          <td>A JSON object holding data about a single movie. Example:
+          <br>{<br>
+          id: 1,<br>
+          title: "Reconstruction",<br>
+          description: "Reconstruction is a psychological romantic drama film and the debut of Christoffer Boe",<br>
+          genre: "Drama",<br>
+          director: "Christoffer Boe",<br>
+          image URL: ""<br>}
+          </td>
+        </tr>
+        <tr>
+          <td>Return genre of movie by title</td>
+          <td>/movies/genres/:title</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            {<br>
+            title: "Reconstruction",<br>
+            genre: "Drama"<br>
+            }
+        </td>
+        </tr>
+        <tr>
+          <td>Return director of movie by name</td>
+          <td>/films/directors/:title</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            {<br>
+            director: "Christoffer Boe",<br>
+            bio: "Christoffer Boe is a Danish film director and screenwriter.",<br>
+            birth year: 1974<br>
+            }
+          </td>
+        </tr>
+        <tr>
+          <td>Allow new users to register</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>JSON</td>
+          <td>
+            {<br>
+            username: "GAtik",<br>
+            name: "Günes Atik",<br>
+            email: "guenes.atik@gmail.com"<br>
+            }
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to update their user info</td>
+          <td>/users/:username</td>
+            <td>POST</td>
+            <td>JSON</td>
+            <td>
+              {<br>
+              username: "GAtik",<br>
+              name: "Günes Atik",<br>
+              email: "guenes.atik@gmail.com"<br>
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>Allow users to add a movie to their list of favourites</td>
+            <td>/users/:username/:movies/</td>
+            <td>PUT</td>
+            <td>None</td>
+            <td>
+              Sucessful PUT request adding film 'MOVIE NAME' to user 'USERNAME'
+            </td>
+          </tr>
+          <tr>
+            <td>Allow users to remove a movie from their favourites</td>
+            <td>/users/:username/:movies</td>
+            <td>DELETE</td>
+            <td>None</td>
+            <td>
+              Sucessful DELETE request, deleting film 'MOVIE NAME' from user
+              'USERNAME's favourite list
+            </td>
+          </tr>
+          <tr>
+            <td>Allow users to deregister</td>
+            <td>/users/:username</td>
+            <td>DELETE</td>
+            <td>None</td>
+            <td>Account deleted for 'USERNAME'</td>
+          </tr>
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
 </body>
 </html>
