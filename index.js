@@ -6,7 +6,7 @@ app.use(morgan('common'));
 
 let topMovies = [
   {
-    title: 'Reconstruction,
+    title: 'Reconstruction',
     year: '2003',
     director: 'Christoffer Boe'
   },
@@ -23,16 +23,17 @@ let topMovies = [
 ];
 
 // GET requests
-app.get('/movies', (req, res) => {
-  res.json(top10movies);
-});
-
 app.get('/', (req, res) => {
   res.send('Welcome to myFlix!');
 });
 
 app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', { root: movie_api });
+});
+
+//Return a list of ALL films
+app.get("/movies", (req, res) => {
+  res.json(topMovies);
 });
 
 // Get a list of all movies
