@@ -62,12 +62,12 @@ app.put('/users/:username', (req,res) => {
 });
 
 // Allow users to add a movie to their list of favourites
-app.post('/users/:username/movies/', (req,res) => {
+app.post('/users/:username/:title/', (req,res) => {
   res.send('Successful POST request adding movie to favorite movie list');
 });
 
 // Allow users to remove a movie from their favourites
-app.delete('/users/:username/movies/', (req,res) => {
+app.delete('/users/:username/:title/', (req,res) => {
   res.send('Successful DELETE request removing movie from favorite movie list of user');
 });
 
