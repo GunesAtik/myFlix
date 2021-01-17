@@ -31,19 +31,14 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', { root: movie_api });
 });
 
-//Return a list of ALL films
-app.get("/movies", (req, res) => {
-  res.json(topMovies);
-});
-
-// Get a list of all movies
+//Return a list of all movies
 app.get('/movies', (req, res) => {
-  res.send('Successful GET request returning data on all movies');
+  res.json(topMovies);
 });
 
 // Get data about a single movie by title
 app.get('/movies/:title', (req,res) => {
-  res.json(topMovies);
+  res.send('Successful GET request returning data on movie title')
 });
 
 // Return genre of movie by title
