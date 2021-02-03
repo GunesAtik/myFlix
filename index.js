@@ -1,7 +1,15 @@
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
 app.use(morgan('common'));
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB',
+{ useNewUrlParser: true, useUnifiedTopology: true });
 
 
 let topMovies = [
@@ -51,9 +59,39 @@ app.get('/movies/directors/:title', (req,res) => {
   res.send('Successful GET request returning data on director');
 });
 
-// Allow new users to register
-app.post('/users', (req,res) => {
-  res.send('Successful POST request registering new user');
+//Add a user
+/* We’ll expect JSON in this format
+{
+  ID: Integer,
+  Username: String,
+  Password: String,
+  Email: String,
+  Birthday: Date
+}*/
+app.post('/users', (req, res) => {
+  Users.findOne({ Username: req.body.Username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) =>{res.status(201).json(user) })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+        })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
 
 // Allow users to update their user info
@@ -67,13 +105,37 @@ app.post('/users/:username/movies/', (req,res) => {
 });
 
 // Allow users to remove a movie from their favourites
-app.delete('/users/:username/:title/', (req,res) => {
+app.delete('/users/:username/:title', (req,res) => {
   res.send('Successful DELETE request removing movie from favorite movie list of user');
 });
 
 // Allow users to deregister
 app.delete('/users/:username', (req,res) => {
   res.send('Successful DELETE request removing user from database');
+});
+
+// Get all users
+app.get('/users', (req, res) => {
+  Users.find()
+    .then((users) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
+// Get a user by username
+app.get('/users/:Username', (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 app.use(express.static('public'));
