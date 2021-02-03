@@ -3,8 +3,13 @@ const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
+const Genres = Models.Genre;
+const Directors = Models.Director;
+
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+app.use(bodyParser.json());
 const morgan = require('morgan');
 app.use(morgan('common'));
 
@@ -41,7 +46,7 @@ app.get('/documentation', (req, res) => {
 
 //Return a list of all movies
 app.get('/movies', (req, res) => {
-  res.json(topMovies);
+  Movies.find().then(users => res.json(users));
 });
 
 // Get data about a single movie by title
