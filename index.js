@@ -46,22 +46,56 @@ app.get('/documentation', (req, res) => {
 
 //Return a list of all movies
 app.get('/movies', (req, res) => {
-  Movies.find().then(users => res.json(users));
+  Movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
 });
 
 // Get data about a single movie by title
-app.get('/movies/:title', (req,res) => {
-  res.send('Successful GET request returning data on movie title')
+app.get('/movies/:Title', (req, res) => {
+  Movies.findOne({
+      Title: req.params.Title
+    })
+    .then((movie) => {
+      res.status(201).json(movie);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // Return genre of movie by title
-app.get('/movies/genres/:title', (req,res) => {
-  res.send('Successful GET request returning data on genre');
+app.get('/movies/Genres/:Title', (req, res) => {
+  Movies.findOne({
+      Title: req.params.Title
+    })
+    .then((movie) => {
+      res.status(201).json(movie.Genre.Name + '. ' + movie.Genre.Description);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // Return director of movie by title
-app.get('/movies/directors/:title', (req,res) => {
-  res.send('Successful GET request returning data on director');
+app.get('/movies/Directors/:Name', (req, res) => {
+  Movies.findOne({
+      'Director.Name': req.params.Name
+    })
+    .then((movie) => {
+      res.status(201).json(movie.Director.Name + ': ' + movie.Director.Bio);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 //Add a user
