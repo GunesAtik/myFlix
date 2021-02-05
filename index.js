@@ -16,25 +16,6 @@ app.use(morgan('common'));
 mongoose.connect('mongodb://localhost:27017/myFlixDB',
 { useNewUrlParser: true, useUnifiedTopology: true });
 
-
-let topMovies = [
-  {
-    title: 'Reconstruction',
-    year: '2003',
-    director: 'Christoffer Boe'
-  },
-  {
-    title: 'The Great Beauty',
-    year: '2013',
-    director: 'Paolo Sorrentino'
-  },
-  {
-    title: 'Blue Jasmine',
-    year: '2013',
-    director: 'Woody Allen'
-  }
-];
-
 // GET requests
 app.get('/', (req, res) => {
   res.send('Welcome to myFlix!');
@@ -73,7 +54,7 @@ app.get('/movies/:Title', (req, res) => {
 // Return genre of movie by title
 app.get('/movies/Genres/:Title', (req, res) => {
   Movies.findOne({
-      Title: req.params.Title
+      Title: req.params.title
     })
     .then((movie) => {
       res.status(201).json(movie.Genre.Name + '. ' + movie.Genre.Description);
@@ -87,7 +68,7 @@ app.get('/movies/Genres/:Title', (req, res) => {
 // Return director of movie by title
 app.get('/movies/Directors/:Name', (req, res) => {
   Movies.findOne({
-      'Director.Name': req.params.Name
+      'Director.Name': req.params.name
     })
     .then((movie) => {
       res.status(201).json(movie.Director.Name + ': ' + movie.Director.Bio);
