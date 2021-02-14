@@ -32,7 +32,7 @@ const passport = require('passport'),
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'your_jwt_secret'
   }, (jwtPayload, callback) => {
-    return Users.findbyID (jwtPayload._id)
+    return Users.findById (jwtPayload._id)
       .then ((user) => {
         return callback(null, user);
       })
