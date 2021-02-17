@@ -264,6 +264,22 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
+
+//Get all users
+app.get('/users',
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Users.find()
+      .then(users => {
+        res.status(201).json(users);
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
+
 // listen for requests
 app.listen(8080, () => {
   console.log("Your myFlix App is on port 8080")
