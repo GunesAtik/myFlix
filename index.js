@@ -108,7 +108,7 @@ app.post('/users',
 check('Username', 'Username is required').isLength({min: 5}),
 check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
 check('Password', 'Password is required').not().isEmpty(),
-check('Email', 'Email does not appeae to be valid').isEmail()
+check('Email', 'Email does not appear to be valid').isEmail()
 ] (req, res) => {
 
 // check the validation object for errors
@@ -157,7 +157,20 @@ if (!errors.isEmpty()) {
   (required)
   Birthday: Date
 }*/
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
+app.put('/users/:Username',
+[
+check('Username', 'Username is required').isLength({min: 5}),
+check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+check('Password', 'Password is required').not().isEmpty(),
+check('Email', 'Email does not appear to be valid').isEmail()
+] (req, res) => {
+
+let errors = validationResult(req);
+
+if (!errors.isEmpty()) {
+  return res.status(422).json({ errors: errors.array() });
+}
+passport.authenticate('jwt', { session: false }),
 (req, res) => {
   console.log(req.params.Username, "String")
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
