@@ -45,11 +45,7 @@ const { check, validationResult } = require('express-validator');
 /*mongoose.connect('mongodb://localhost:27017/myFlixDB',
 { useNewUrlParser: true, useUnifiedTopology: true });*/
 
-<<<<<<< HEAD
 mongoose.connect('mongodb+srv://myflixdbuser:qq9scsqelzi1r7gw@projects.lndox.mongodb.net/myFlixDB?retryWrites=true&w=majority',
-=======
-mongoose.connect('mongodb+srv://myFlixDBUser:qq9sCSqElZi1r7gW@projects.lndox.mongodb.net/myFlixDB?retryWrites=true&w=majority',
->>>>>>> 06f9651135d8305a4d463e1882ee39e7d3a4edde
   { useNewUrlParser: true, useUnifiedTopology: true });
 
 // GET requests
