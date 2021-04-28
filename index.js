@@ -17,35 +17,35 @@ const passport = require('passport');
 require('./passport');
 const cors = require('cors');
 
-let allowedOrigins = [
-  "http://localhost:1234"
-];
+// let allowedOrigins = [
+//   "http://localhost:1234"
+// ];
 /**
  * CORS blocks requests from origins not listed in 'allowedOrigins'
  */
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      console.log(origin, allowedOrigins.indexOf(origin) === -1);
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        // If a specific origin isn’t found on the list of allowed origins
-        let message =
-          "The CORS policy for this application does not allow access from origin " +
-          origin;
-        return callback(new Error(message), false);
-      }
-      return callback(null, true);
-    },
-  })
-);
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       console.log(origin, allowedOrigins.indexOf(origin) === -1);
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.indexOf(origin) === -1) {
+//         // If a specific origin isn’t found on the list of allowed origins
+//         let message =
+//           "The CORS policy for this application does not allow access from origin " +
+//           origin;
+//         return callback(new Error(message), false);
+//       }
+//       return callback(null, true);
+//     },
+//   })
+// );
 
 const { check, validationResult } = require('express-validator');
 
 /*mongoose.connect('mongodb://localhost:27017/myFlixDB',
 { useNewUrlParser: true, useUnifiedTopology: true });*/
 
-mongoose.connect('mongodb+srv://myflixdbuser:qq9scsqelzi1r7gw@projects.lndox.mongodb.net/myFlixDB?retryWrites=true&w=majority',
+mongoose.connect(process.env.CONNECTION_URL,
   { useNewUrlParser: true, useUnifiedTopology: true });
 
 // GET requests
