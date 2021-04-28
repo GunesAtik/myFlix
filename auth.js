@@ -2,7 +2,6 @@ const jwtSecret = 'your_jwt_secret'; //has to be same key used in theJWT Strateg
 
 const jwt = require('jsonwebtoken'),
   passport = require('passport');
-const cors = require('cors');
 
 require('./passport'); //local passport file
 
@@ -16,7 +15,7 @@ let generateJWTToken = (user) => {
 
 /* POST login. */
 module.exports = (router) => {
-  router.post('/login', cors(), (req, res) => {
+  router.post('/login', (req, res) => {
     passport.authenticate('local', { session: false }, (error, user, info) => {
       if (error || !user) {
         return res.status(400).json({
